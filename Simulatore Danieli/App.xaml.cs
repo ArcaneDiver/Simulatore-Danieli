@@ -1,6 +1,5 @@
 ﻿
 using System.Windows;
-using Simulatore_Danieli.ViewModels;
 
 namespace Simulatore_Danieli
 {
@@ -9,6 +8,5 @@ namespace Simulatore_Danieli
     /// </summary>
     public partial class App : Application
     {
-       
     }
 }

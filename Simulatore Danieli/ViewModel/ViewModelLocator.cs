@@ -37,13 +37,7 @@ namespace Simulatore_Danieli.ViewModel
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
         }
 
-        public MainViewModel MainViewModel
-        {
-	        get
-	        {
-		        return ServiceLocator.Current.GetInstance<MainViewModel>();
-	        }
-        }
+        public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 
         private void NotifyUserMethod(NotificationMessage message)
         {
