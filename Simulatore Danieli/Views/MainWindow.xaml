@@ -5,8 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simulatore_Danieli.ViewModel"
         mc:Ignorable="d"
-        Title="Simulatore Daniel" Height="350" Width="500">
-    <Grid HorizontalAlignment="Center">
-        
+        Title="Simulatore Daniel" Height="350" Width="500" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="10,10,9.6,10.4">
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="10,0,10, 20" />
+                    <Setter Property="FontSize" Value="16" />
+
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="3" Background="White" BorderBrush="#000" BorderThickness="1">
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      Content="{TemplateBinding Content}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Command="{ Binding StartCastCommand}">Inizio Colata</Button>
+            <Button Grid.Row="0" Grid.Column="1" Command="{ Binding PauseCastCommand}">Pausa Colata</Button>
+            <Button Grid.Row="0" Grid.Column="2" Command="{ Binding StopCastCommand}">Fine Colata</Button>
+
+            <Button Grid.Row="1"  Grid.ColumnSpan="3" Command="{ Binding Crea}">Produzione Billetta</Button>
+        </Grid>
+        <ListView Grid.Row="1" ItemsSource="{ Binding Casts}" >
+
+        </ListView>
     </Grid>
 </Window>

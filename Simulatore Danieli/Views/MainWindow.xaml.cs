@@ -14,7 +14,5 @@ namespace Simulatore_Danieli
         {
             InitializeComponent();
         }
-        
-
     }
 }
