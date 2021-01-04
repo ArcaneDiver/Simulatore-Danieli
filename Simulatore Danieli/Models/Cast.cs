@@ -11,8 +11,8 @@ namespace Simulatore_Danieli.Models
 		private int _sort;
 		private int _weight;
 
-		private DateTime _start;
-		private DateTime _end;
+		private long _start;
+		private long _end;
 
 		private IList<TypeOfSteel> _steels;
 
@@ -41,13 +41,13 @@ namespace Simulatore_Danieli.Models
 			set => Set(() => this._weight, ref _weight, value);
 		}
 
-		public DateTime Start
+		public long Start
 		{
 			get => _start;
 			set => Set(() => this._start, ref _start, value);
 		}
 
-		public DateTime End
+		public long End
 		{
 			get => _end;
 			set => Set(() => this._end, ref _end, value);
@@ -58,5 +58,6 @@ namespace Simulatore_Danieli.Models
 			get => _steels;
 			set => Set(() => this._steels, ref _steels, value);
 		}
+
 	}
 }

@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Simulatore_Danieli.ViewModel"
+        xmlns:simulatoreDanieli="clr-namespace:Simulatore_Danieli"
         mc:Ignorable="d"
-        Title="Simulatore Daniel" Height="350" Width="500" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        Title="Simulatore Daniel" Height="350" Width="500"
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="10,10,9.6,10.4">
@@ -37,8 +39,8 @@
             </Grid.Resources>
 
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -50,10 +52,45 @@
             <Button Grid.Row="0" Grid.Column="1" Command="{ Binding PauseCastCommand}">Pausa Colata</Button>
             <Button Grid.Row="0" Grid.Column="2" Command="{ Binding StopCastCommand}">Fine Colata</Button>
 
-            <Button Grid.Row="1"  Grid.ColumnSpan="3" Command="{ Binding Crea}">Produzione Billetta</Button>
+            <Button Grid.Row="1" Grid.ColumnSpan="3" Command="{ Binding CreateProductCommand}">Produzione Billetta</Button>
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{ Binding Casts}" >
+        <ListBox Grid.Row="1" x:Name="Casts" ItemsSource="{Binding Casts}" HorizontalAlignment="Stretch" Padding="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="170*" />
+                            <ColumnDefinition Width="157*" />
+                            <ColumnDefinition Width="133*" />
+                        </Grid.ColumnDefinitions>
 
-        </ListView>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,1.4,0">
+                            <Run Text="ID:" />
+                            <Run Text="{Binding Path=Code}" />
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="63,0,0.2,0" Visibility="{Binding Path= Start, Converter={StaticResource LongVisibilityConverter}}">
+                            <Run Text="Data Inizio:" />
+                            <Run Text="{Binding Path=Start}" />
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="129.6,0,0,0">
+                            <Run Text="Data Fine:" />
+                            <Run Text="{Binding Path=End}" />
+                        </TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Margin="0,0,1.4,0">
+                            <Run Text="Weight:" />
+                            <Run Text="{Binding Path=Weight}" />
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,1.4,0">
+                            <Run Text="Order:"/>
+                            <Run Text="{Binding Path=Sort}"/>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

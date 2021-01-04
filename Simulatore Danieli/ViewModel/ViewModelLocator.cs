@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Messaging;
+using Simulatore_Danieli.Services;
 
 namespace Simulatore_Danieli.ViewModel
 {
@@ -35,6 +36,15 @@ namespace Simulatore_Danieli.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             Messenger.Default.Register<NotificationMessage>(this, NotifyUserMethod);
+
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                SimpleIoc.Default.Register<IDataService, TestDataService>();
+            }
+            else
+            {
+                SimpleIoc.Default.Register<IDataService, DataService>();
+            }
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();

@@ -1,12 +1,15 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using RestSharp;
 using Simulatore_Danieli.Models;
+using Simulatore_Danieli.Services;
 
 namespace Simulatore_Danieli.ViewModel
 {
@@ -31,25 +34,12 @@ namespace Simulatore_Danieli.ViewModel
 
 		public MainViewModel()
 		{
-			var restEndpoint = ConfigurationManager.AppSettings.Get("restEndpoint");
-
-			apiClient = new RestClient(restEndpoint);
-			Debug.WriteLine(restEndpoint);
-
-
 			StartCastCommand = new RelayCommand(StartCastMethod);
 			PauseCastCommand = new RelayCommand(PauseCastMethod);
 			StopCastCommand = new RelayCommand(StopCastMethod);
 			CreateProductCommand = new RelayCommand(CreateProductMethod);
 
-			if (IsInDesignMode)
-			{
-				
-			}
-			else
-			{
-
-			}
+			RetrieveProducts();
 		}
 
 		public ICommand StartCastCommand { get; }
@@ -60,24 +50,32 @@ namespace Simulatore_Danieli.ViewModel
 		public ObservableCollection<Product> Products => _products;
 		public ObservableCollection<Cast> Casts => _casts;
 
+		public IDataService Service => SimpleIoc.Default.GetInstance<IDataService>();
+
 		private void StartCastMethod()
 		{
-			Messenger.Default.Send(new NotificationMessage("Start Cast"));
+			Service.StartProduction(1);
 		}
 
 		private void PauseCastMethod()
 		{
-			Messenger.Default.Send(new NotificationMessage("Pause Cast"));
+			Service.PauseProduction(1);
 		}
 
 		private void StopCastMethod()
 		{
-			Messenger.Default.Send(new NotificationMessage("Stop Cast"));
+			Service.StopProduction(1);
 		}
 
 		private void CreateProductMethod()
 		{
-			Messenger.Default.Send(new NotificationMessage("Billetta creata"));
+			Service.ProduceBillet(1);
+		}
+
+		private void RetrieveProducts()
+		{
+			IList<Cast> casts = Service.GetCasts();
+			_casts = new ObservableCollection<Cast>(casts);
 		}
 	}
 }

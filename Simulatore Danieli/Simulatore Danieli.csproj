@@ -86,10 +86,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LongVisibilityConverter.cs" />
     <Compile Include="Models\Cast.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\TypeOfSteel.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\TestDataService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">

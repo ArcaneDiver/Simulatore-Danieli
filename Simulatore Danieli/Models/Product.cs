@@ -17,7 +17,7 @@ namespace Simulatore_Danieli.Models
         private int _section; // TODO: Verify types
 
         private IList<Cast> _casts;
-        
+
         public int Code
         {
             get => _code;
@@ -59,5 +59,6 @@ namespace Simulatore_Danieli.Models
 	        get => _casts;
 	        set => Set(() => this._casts, ref _casts, value);
         }
+
     }
 }
